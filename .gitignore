@@ -9,4 +9,5 @@ el-get
 url
 bookmarks
 *.dat
+tramp
 .DS_Store

@@ -23,24 +23,29 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(defvar home-dir (file-name-directory load-file-name)
-  "The root dir of emacs configure")
-(defvar modules-dir (concat home-dir "modules/")
-  "This directory houses all of the modules written from scratch.")
-(defvar vendor-dir (concat home-dir "vendor/")
-  "This directory house Emacs Lisp packages that are not yet available in
-ELPA (or MELPA).")
-(defvar snippets-dir (concat home-dir "snippets/")
-  "This folder houses addition yasnippet bundles distributed with Prelude.")
+(defun remove-elc-on-save ()
+  "If you're saving an elisp file, likely the .elc is no longer valid."
+  (make-local-variable 'after-save-hook)
+  (add-hook 'after-save-hook
+            (lambda ()
+              (if (file-exists-p (concat buffer-file-name "c"))
+                  (delete-file (concat buffer-file-name "c"))))))
 
-(add-to-list 'load-path modules-dir)
-(add-to-list 'load-path vendor-dir)
+(defun emacs-lisp-mode-defaults ()
+  (require 'paredit)
+  (paredit-mode +1)
+  (remove-elc-on-save)
+  (turn-on-eldoc-mode)
+  (rainbow-mode +1))
 
-(require 'my-packages)
-(require 'my-customs)
-(require 'my-funcs)
-;; OSX specific settings
-(when (eq system-type 'darwin)
-  (require 'my-osx))
-(require 'my-programming)
-(require 'my-keybindings)
+(add-hook 'emacs-lisp-mode-hook 'emacs-lisp-mode-defaults)
+
+(defun ielm-mode-defaults ()
+  (require 'paredit)
+  (paredit-mode +1)
+  (turn-on-eldoc-mode))
+(add-hook 'ielm-mode-hook 'ielm-mode-defaults)
+
+(define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
+
+(provide 'my-emacs-lisp)

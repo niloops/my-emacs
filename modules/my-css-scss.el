@@ -23,24 +23,16 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(defvar home-dir (file-name-directory load-file-name)
-  "The root dir of emacs configure")
-(defvar modules-dir (concat home-dir "modules/")
-  "This directory houses all of the modules written from scratch.")
-(defvar vendor-dir (concat home-dir "vendor/")
-  "This directory house Emacs Lisp packages that are not yet available in
-ELPA (or MELPA).")
-(defvar snippets-dir (concat home-dir "snippets/")
-  "This folder houses addition yasnippet bundles distributed with Prelude.")
+(defun css-mode-defaults ()
+  "My css mode hooks"
+  (setq css-indent-offset 2)
+  (rainbow-mode +1))
+(add-hook 'css-mode-hook 'css-mode-defaults)
 
-(add-to-list 'load-path modules-dir)
-(add-to-list 'load-path vendor-dir)
+(defun scss-mode-defaults ()
+  "My css mode hooks"
+  (css-mode-defaults)
+  (setq scss-compile-at-save nil))
+(add-hook 'scss-mode-hook 'scss-mode-defaults)
 
-(require 'my-packages)
-(require 'my-customs)
-(require 'my-funcs)
-;; OSX specific settings
-(when (eq system-type 'darwin)
-  (require 'my-osx))
-(require 'my-programming)
-(require 'my-keybindings)
+(provide 'my-css-scss)

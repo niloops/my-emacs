@@ -23,8 +23,6 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(provide 'my-packages)
-
 (require 'cl)
 (require 'package)
 
@@ -35,16 +33,27 @@
 (setq url-http-attempt-keepalives nil)
 
 (defvar my-packages
-  '(expand-region 
-    helm 
-    gist 
-    magit 
-    magithub 
+  '(expand-region
+    helm
+    gist
+    magit
+    magithub
     melpa
-    rainbow-mode 
+    rainbow-mode
     yasnippet
     auto-complete
-    markdown-mode)
+    markdown-mode
+    inf-ruby
+    ruby-block
+    ruby-end
+    yari
+    rvm
+    rinari
+    js2-mode
+    coffee-mode
+    scss-mode
+    yaml-mode
+    solarized-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -65,4 +74,4 @@
 
 (my-install-packages)
 
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(provide 'my-packages)

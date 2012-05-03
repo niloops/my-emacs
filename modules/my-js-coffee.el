@@ -23,24 +23,30 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(defvar home-dir (file-name-directory load-file-name)
-  "The root dir of emacs configure")
-(defvar modules-dir (concat home-dir "modules/")
-  "This directory houses all of the modules written from scratch.")
-(defvar vendor-dir (concat home-dir "vendor/")
-  "This directory house Emacs Lisp packages that are not yet available in
-ELPA (or MELPA).")
-(defvar snippets-dir (concat home-dir "snippets/")
-  "This folder houses addition yasnippet bundles distributed with Prelude.")
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 
-(add-to-list 'load-path modules-dir)
-(add-to-list 'load-path vendor-dir)
+(defun coffee-mode-defaults ()
+  "My coffee mode hooks"
+  (set (make-local-variable 'tab-width) 2)
 
-(require 'my-packages)
-(require 'my-customs)
-(require 'my-funcs)
-;; OSX specific settings
-(when (eq system-type 'darwin)
-  (require 'my-osx))
-(require 'my-programming)
-(require 'my-keybindings)
+  ;; If you don't want your compiled files to be wrapped
+  (setq coffee-args-compile '("-c" "--bare"))
+
+  ;; *Messages* spam
+  (setq coffee-debug-mode t)
+
+  ;; electric-indent doesn't play nice with coffee-mode's "smart"
+  ;; indent
+  (electric-indent-mode -1)
+
+  ;; Emacs key binding
+  (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
+  (define-key coffee-mode-map [(meta R)] 'coffee-compile-region)
+
+  (and (file-exists-p (buffer-file-name))
+       (file-exists-p (coffee-compiled-file-name))
+       (coffee-cos-mode t))
+)
+(add-hook 'coffee-mode-hook 'coffee-mode-defaults)
+
+(provide 'my-js-coffee)

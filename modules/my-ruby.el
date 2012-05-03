@@ -23,24 +23,25 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(defvar home-dir (file-name-directory load-file-name)
-  "The root dir of emacs configure")
-(defvar modules-dir (concat home-dir "modules/")
-  "This directory houses all of the modules written from scratch.")
-(defvar vendor-dir (concat home-dir "vendor/")
-  "This directory house Emacs Lisp packages that are not yet available in
-ELPA (or MELPA).")
-(defvar snippets-dir (concat home-dir "snippets/")
-  "This folder houses addition yasnippet bundles distributed with Prelude.")
+(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
+(require 'haml-mode)
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 
-(add-to-list 'load-path modules-dir)
-(add-to-list 'load-path vendor-dir)
+(defun ruby-mode-defaults ()
+  "My ruby mode hooks"
+  (inf-ruby-setup-keybindings)
+  (rvm-use-default)
+  (require 'ruby-block)
+  (ruby-block-mode t)
+  (setq ruby-block-highlight-toggle t)
+  (ruby-end-mode +1)
+  (setq comint-process-echoes t)
+  (local-set-key (kbd "C-h r") 'yari))
+(add-hook 'ruby-mode-hook 'ruby-mode-defaults)
 
-(require 'my-packages)
-(require 'my-customs)
-(require 'my-funcs)
-;; OSX specific settings
-(when (eq system-type 'darwin)
-  (require 'my-osx))
-(require 'my-programming)
-(require 'my-keybindings)
+(provide 'my-ruby)

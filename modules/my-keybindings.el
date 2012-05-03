@@ -86,4 +86,7 @@
 (global-set-key (kbd "C-c l") 'reload-url)
 (global-set-key (kbd "C-c g") 'google)
 
+;; programming
+(global-set-key (kbd "C-c i") 'ido-goto-symbol)
+
 (provide 'my-keybindings)

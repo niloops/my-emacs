@@ -64,7 +64,7 @@ indent yanked text (with prefix arg don't indent)."
            (or (derived-mode-p 'prog-mode)
                (member major-mode yank-indent-modes)))
       (let ((transient-mark-mode nil))
-    (yank-advised-indent-function (region-beginning) (region-end)))))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (defadvice yank-pop (after yank-pop-indent activate)
   "If current mode is one of 'yank-indent-modes,
@@ -72,7 +72,87 @@ indent yanked text (with prefix arg don't indent)."
   (if (and (not (ad-get-arg 0))
            (or (derived-mode-p 'prog-mode)
                (member major-mode yank-indent-modes)))
-    (let ((transient-mark-mode nil))
-    (yank-advised-indent-function (region-beginning) (region-end)))))
+      (let ((transient-mark-mode nil))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
+
+(defun ido-goto-symbol (&optional symbol-list)
+  "Refresh imenu and jump to a place in the buffer using Ido."
+  (interactive)
+  (unless (featurep 'imenu)
+    (require 'imenu nil t))
+  (cond
+   ((not symbol-list)
+    (let ((ido-mode ido-mode)
+          (ido-enable-flex-matching
+           (if (boundp 'ido-enable-flex-matching)
+               ido-enable-flex-matching t))
+          name-and-pos symbol-names position)
+      (unless ido-mode
+        (ido-mode 1)
+        (setq ido-enable-flex-matching t))
+      (while (progn
+               (imenu--cleanup)
+               (setq imenu--index-alist nil)
+               (ido-goto-symbol (imenu--make-index-alist))
+               (setq selected-symbol
+                     (ido-completing-read "Symbol? " symbol-names))
+               (string= (car imenu--rescan-item) selected-symbol)))
+      (unless (and (boundp 'mark-active) mark-active)
+        (push-mark nil t nil))
+      (setq position (cdr (assoc selected-symbol name-and-pos)))
+      (cond
+       ((overlayp position)
+        (goto-char (overlay-start position)))
+       (t
+        (goto-char position)))))
+   ((listp symbol-list)
+    (dolist (symbol symbol-list)
+      (let (name position)
+        (cond
+         ((and (listp symbol) (imenu--subalist-p symbol))
+          (ido-goto-symbol symbol))
+         ((listp symbol)
+          (setq name (car symbol))
+          (setq position (cdr symbol)))
+         ((stringp symbol)
+          (setq name symbol)
+          (setq position
+                (get-text-property 1 'org-imenu-marker symbol))))
+        (unless (or (null position) (null name)
+                    (string= (car imenu--rescan-item) name))
+          (add-to-list 'symbol-names name)
+          (add-to-list 'name-and-pos (cons name position))))))))
+
+(defun local-comment-auto-fill ()
+  (set (make-local-variable 'comment-auto-fill-only-comments) t)
+  (auto-fill-mode t))
+
+(defun add-watchwords ()
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
+          1 font-lock-warning-face t))))
+
+;; show the name of the current function definition in the modeline
+(defun display-which-func ()
+  (require 'which-func)
+  (which-function-mode 1))
+
+(defun prog-mode-defaults ()
+  "Default coding hook, useful with any programming language."
+  (local-comment-auto-fill)
+  (add-watchwords)
+  (display-which-func)
+  (add-hook 'before-save-hook 'whitespace-cleanup nil t))
+(add-hook 'prog-mode-hook 'prog-mode-defaults)
+
+;; languages
+(require 'my-emacs-lisp)
+(require 'my-ruby)
+(require 'my-js-coffee)
+(require 'my-css-scss)
+
+;; others
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 (provide 'my-programming)
