@@ -258,6 +258,10 @@
 (require 'ibus)
 (add-hook 'after-init-hook 'ibus-mode-on)
 
+;;chinese font
+(set-fontset-font (frame-parameter nil 'font)
+                  'han '("WenQuanYi Zen Hei" . "unicode-bmp"))
+
 ;;;text mode
 
 ;; flyspell-mode does spell-checking on the fly as you type
