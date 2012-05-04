@@ -78,8 +78,8 @@
 ;; buffer name (if the buffer isn't visiting a file)
 (setq frame-title-format
       '("" invocation-name " " (:eval (if (buffer-file-name)
-                                            (abbreviate-file-name (buffer-file-name))
-                                          "%b"))))
+                                          (abbreviate-file-name (buffer-file-name))
+                                        "%b"))))
 
 (load-theme 'solarized-dark t)
 
@@ -100,7 +100,7 @@
 ;; personal indentation width, while maintaining the style (and
 ;; meaning) of any files you load.
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)         
+(setq-default tab-width 4)
 
 ;; delete selection with a keypress
 (delete-selection-mode t)
@@ -184,7 +184,7 @@
 (show-paren-mode +1)
 (setq show-paren-style 'parenthesis)
 
-;; highlight the current line 
+;; highlight the current line
 (global-hl-line-mode +1)
 
 ;; tramp, for sudo access
@@ -253,6 +253,10 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
+
+;;ibus
+(require 'ibus)
+(add-hook 'after-init-hook 'ibus-mode-on)
 
 ;;;text mode
 
