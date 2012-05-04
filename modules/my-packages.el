@@ -52,8 +52,7 @@
     js2-mode
     coffee-mode
     scss-mode
-    yaml-mode
-    solarized-theme)
+    yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()

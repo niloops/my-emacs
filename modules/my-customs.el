@@ -81,10 +81,6 @@
                                           (abbreviate-file-name (buffer-file-name))
                                         "%b"))))
 
-(load-theme 'solarized-dark t)
-
-(set-face-attribute 'default nil :height 140)
-
 ;;;general edit
 
 (setq require-final-newline t)
