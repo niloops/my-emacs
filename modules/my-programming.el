@@ -147,6 +147,7 @@ indent yanked text (with prefix arg don't indent)."
 
 ;; languages
 (require 'my-emacs-lisp)
+(require 'my-shell)
 (require 'my-ruby)
 (require 'my-js-coffee)
 (require 'my-css-scss)
