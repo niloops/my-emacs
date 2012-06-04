@@ -253,6 +253,14 @@
 ;;ibus
 (require 'ibus)
 (add-hook 'after-init-hook 'ibus-mode-on)
+;; Use C-SPC for Set Mark command
+(ibus-define-common-key ?\C-\s nil)
+;; Use C-/ for Undo command
+(ibus-define-common-key ?\C-/ nil)
+;; Use s-SPC to toggle
+(global-set-key (kbd "s-SPC") 'ibus-toggle)
+;; Change cursor color depending on IBus status
+(setq ibus-cursor-color '("red" "green" "limegreen"))
 
 ;;;text mode
 

@@ -3,6 +3,7 @@ Basic:
 0. General
 
     C-x C-c		退出	
+    C-u <parameter>  give parameter to function
     C-u n/M-n	重复命令, C-u默认4次, C-u,C-u16次...
     M-x/C-x C-m  执行命令
     M-p/M-n	    命令区历史查看
@@ -24,38 +25,41 @@ Basic:
 	
     M-g g 	 	去指定行
     M-m	        移到当前行第一个非空白字符
-
+  
     C-x =	    查看字符位置情况
 	C-u C-x =   查看字符详情，非常重要！
 
 2. Edit
 
-	C-x u/C-_	undo操作
+	C-/ 	undo
 	
-	M-- 	加在以下命令前边，都是行首到光标，不然都是光标到行尾
+	C-d 	delete character
+	M-d	    kill word
+	C-M-h   kill word before point
+    C-k	    kill line
+    C-u n C-k  kill multi-lines (not same as repeat C-k)
+	M-k	    kill sentence
+    M--     prefix for operation from begin of line to point
 
-	C-d 	删除当前字符
-	M-d	    删除当前单词
-	C-M-h   向前删除单词
-    C-k	    删除行
-	M-k	    删除句子
+	C-y	    yank the killed text back
+	M-y	    replaces that yanked text with the previous kill
 
-	C-y	    除了C-d删除的都能召回,（kill类指令)，召回最新
-	M-y	    把删除环中以前的一次次召回
+	C-SPC/C-@     set mark
+	C-M-SPC/M-@   set mark from point to word end
+	C-w	    kill region
+	M-w	    copy region 
+	C-x C-x	exchange point and mark, works when the mars isn't active
+	M-h	    mark paragraph
+	C-x h	mark whole buffer
+    M-=     display the region info
+	transient-mark-mode
 
-	C-o     增加空行
-	C-x C-o 删除连续空行
+	C-o     add empty line
+	C-x C-o kill multi empty line
 	
-	C-@     Mark文本标记
-	M-@     Mark文本，当前到词尾
-	C-w	    文本块删除(剪切)
-	M-w	    文本块复制
-	C-x C-x	检查文本标记位置
-	M-h	    标记整段
-	C-x h	标记整buffer
-    M-=     统计选中区域详情
-
-    M-q	    重新排布段落的换行	
+    auto-fill-mode
+    C-x f   set fill column 
+    M-q	    refill the paragraph	
 	
 	C-t     交换两个字符的位置
 	M-t	    交换两个单词的位置
@@ -74,30 +78,22 @@ Basic:
     C-x r c 清除一个矩形块(使其变成空白)
     C-x r t 在选定区域的所有列前插入样的字符
 
-    auto-fill-mode
-	transient-mark-mode
-
 3. Search & Replace
 
-	C-s	    递增查找
-	C-r	    反向递增查找
-    M-s,M-r 正则查找 *
-    <C-w>   Yank next word 
-    <C-M-w> delete character from end of search string.
+	C-s	    incremental search
+	C-r	    reverse incremental search
+    M-s,M-r regexp search
+    <C-w>   yank word at point
     <M-s C-e> yank rest of line onto end of search string and search for it
     <C-q>   quote control character to search for it.
     <M-c>   toggle search case-sensitivity
     <M-e>   edit the search string in the minibuffer
     <C-h>   Isearch help
 
-    M-%     查找替换
-    C-M-%   正则查找替换
-    <C-r>   查询-替换操作中递归编辑
-    <M-C-c> 退出递归编辑
-    	捕获文本在目标串中的表示
-			\&	整字串
-			\N	部分字串，N为第N个()				
-			\#	replace多少次
+    M-%     query and replace
+    C-M-%   query and replace with regexp
+    <C-r>   recursive edit
+    <M-C-c> exit recursive edit
 
 4. Files & Buffers
 
@@ -177,8 +173,6 @@ Programming:
 
     M-;  comment
     M-j  add new comment line
-
-
 
 
 
