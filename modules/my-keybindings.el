@@ -41,6 +41,10 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;;search
+(global-set-key (kbd "M-s") 'isearch-forward-regexp)
+(global-set-key (kbd "M-r") 'isearch-backward-regexp)
+
 ;; isearch
 (define-key isearch-mode-map (kbd "C-o")
   (lambda () (interactive)
@@ -54,7 +58,7 @@
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
 ;; use hippie-expand instead of dabbrev
-(global-set-key (kbd "M-/") 'hippie-expand) 
+(global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; commands
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)

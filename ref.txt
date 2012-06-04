@@ -1,0 +1,184 @@
+Basic:
+
+0. General
+
+    C-x C-c		退出	
+    C-u n/M-n	重复命令, C-u默认4次, C-u,C-u16次...
+    M-x/C-x C-m  执行命令
+    M-p/M-n	    命令区历史查看
+
+    C-h ?	帮助的帮助
+	C-h a	这个概念涉及哪些命令
+	apropos	这个概念涉及哪些函数和变量
+	super-apropos	哪些文档提到此概念
+
+1. View
+
+	C-f,C-b,C-p,C-n	 上下左右
+	M-f,M-b		左右移动(单词)
+	C-a,C-e		行首和行尾
+	M-a,M-e		左右移动(句子）
+	M-{,M-}		上下移动(段落)
+	C-v,M-v		上下翻动(翻屏)
+	M-<,M->	  	缓冲区开头和结尾
+	
+    M-g g 	 	去指定行
+    M-m	        移到当前行第一个非空白字符
+
+    C-x =	    查看字符位置情况
+	C-u C-x =   查看字符详情，非常重要！
+
+2. Edit
+
+	C-x u/C-_	undo操作
+	
+	M-- 	加在以下命令前边，都是行首到光标，不然都是光标到行尾
+
+	C-d 	删除当前字符
+	M-d	    删除当前单词
+	C-M-h   向前删除单词
+    C-k	    删除行
+	M-k	    删除句子
+
+	C-y	    除了C-d删除的都能召回,（kill类指令)，召回最新
+	M-y	    把删除环中以前的一次次召回
+
+	C-o     增加空行
+	C-x C-o 删除连续空行
+	
+	C-@     Mark文本标记
+	M-@     Mark文本，当前到词尾
+	C-w	    文本块删除(剪切)
+	M-w	    文本块复制
+	C-x C-x	检查文本标记位置
+	M-h	    标记整段
+	C-x h	标记整buffer
+    M-=     统计选中区域详情
+
+    M-q	    重新排布段落的换行	
+	
+	C-t     交换两个字符的位置
+	M-t	    交换两个单词的位置
+	C-x C-t	交换两行
+    M-^	    当前行合并到上一行
+
+	M-c	    单词首字母大写
+	M-u	    单词全字母大写
+	M-l	    单词全字母小写
+
+    C-q     输出操作字符
+
+    C-x r k 剪切一个矩形块
+    C-x r y 粘贴一个矩形块
+    C-x r o 插入一个矩形块
+    C-x r c 清除一个矩形块(使其变成空白)
+    C-x r t 在选定区域的所有列前插入样的字符
+
+    auto-fill-mode
+	transient-mark-mode
+
+3. Search & Replace
+
+	C-s	    递增查找
+	C-r	    反向递增查找
+    M-s,M-r 正则查找 *
+    <C-w>   Yank next word 
+    <C-M-w> delete character from end of search string.
+    <M-s C-e> yank rest of line onto end of search string and search for it
+    <C-q>   quote control character to search for it.
+    <M-c>   toggle search case-sensitivity
+    <M-e>   edit the search string in the minibuffer
+    <C-h>   Isearch help
+
+    M-%     查找替换
+    C-M-%   正则查找替换
+    <C-r>   查询-替换操作中递归编辑
+    <M-C-c> 退出递归编辑
+    	捕获文本在目标串中的表示
+			\&	整字串
+			\N	部分字串，N为第N个()				
+			\#	replace多少次
+
+4. Files & Buffers
+
+   	C-x C-f		查找文件并打开
+	C-x C-s		保存文件
+	C-x C-w		把缓冲区内容写入文件
+    C-x C-v		读入另外一个文件替换
+	C-x i		插入文件到光标处
+    revert-buffer	回复缓冲区
+
+	C-x b	切换Buffer
+	C-x C-b	调出buffer列表
+	C-x k	删除当前Buffer
+	C-x C-q	切换当前buffer是否只读
+
+5. Windows & Frames
+
+	C-x 0	关闭当前窗口
+	C-x 1	只保留当前窗口
+	C-x 2	水平分割窗口
+	C-x 3	垂直分割窗口
+	C-x o,C-x M-o	窗口间的移动
+	M-C-v,Shift-M-C-v	卷动其他窗口内容
+
+    C-x 4 自动在新窗口里打开, 如C-x 4 f/C-x 4 b 
+    C-x 5 自动在新frame里打开
+
+    compare-window
+
+6. Bookmarks
+
+	C-x r m	在当前光标位置设置书签
+	C-x r b	打开书签
+    C-x r l     打开书签清单
+    bookmark-rename
+	bookmark-delete
+
+7. Environments
+
+	M-!         执行UNIX命令
+	C-u M-!		结果进当前编辑缓冲区
+	M-|	        将标记文本块作为shell command的输入
+    man         
+    grep
+
+8. Macros
+
+    C-x (       录制宏
+	C-x )	    退出宏
+	C-x e	    执行宏，前边可以加C-u
+	C-u C-x(	为以前的宏添加动作
+	name-last-kbd-macro	保存最后一个宏
+	    之后用M-x macroname 调用,前边加M-n执行n次
+	    保存以后就变成函数了，直接用M-x name即可
+	insert-kbd-macro macroname
+		打开一个文件后执行，即可把宏的lisp代码保存入文件
+	load-file filename	
+	  	加载宏定义文件，也可以加载任何lisp定制文件
+	C-u C-x q	录制宏时进行递归编辑
+	M-C-c	退出递归编辑
+	C-x q	让宏停下来进行询问
+
+Extend:
+
+0.  Shell
+	
+	M-x shell	
+
+    C-c 		prefix before unix control key
+	C-c C-o		flush output of last command
+	C-c C-r, C-c C-e    put output to top or bottom of window
+	C-c C-p, C-c C-n 	jump between commands
+
+Programming:
+
+0.  General       
+
+    M-;  comment
+    M-j  add new comment line
+
+
+
+
+
