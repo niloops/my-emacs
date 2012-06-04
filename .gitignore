@@ -11,3 +11,4 @@ bookmarks
 *.dat
 tramp
 .DS_Store
+session.*

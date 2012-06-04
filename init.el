@@ -63,3 +63,7 @@ ELPA (or MELPA).")
  )
 
 (set-face-attribute 'default nil :height 140)
+
+;;chinese font
+(set-fontset-font (frame-parameter nil 'font)
+                  'han '("WenQuanYi Zen Hei" . "unicode-bmp"))
