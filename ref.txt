@@ -167,6 +167,16 @@ Extend:
 	C-c C-r, C-c C-e    put output to top or bottom of window
 	C-c C-p, C-c C-n 	jump between commands
 
+1.  Helm
+
+    C-c h       helm mini
+
+2. External
+
+   C-c u        browse-url
+   C-c l        reload-url
+   C-c g        google
+
 Programming:
 
 0.  General       
@@ -174,5 +184,5 @@ Programming:
     M-;  comment
     M-j  add new comment line
 
-
+    C-=  expand region
 
