@@ -31,11 +31,11 @@
 (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
 (require 'haml-mode)
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+(rvm-use-default)
 
 (defun ruby-mode-defaults ()
   "My ruby mode hooks"
   (inf-ruby-setup-keybindings)
-  (rvm-use-default)
   (require 'ruby-block)
   (ruby-block-mode t)
   (setq ruby-block-highlight-toggle t)
