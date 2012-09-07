@@ -24,6 +24,7 @@
 ;; Boston, MA 02110-1301, USA.
 
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs$" . handlebars-mode))
 
 (defun coffee-mode-defaults ()
   "My coffee mode hooks"

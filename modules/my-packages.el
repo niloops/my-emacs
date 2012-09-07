@@ -36,6 +36,7 @@
   '(expand-region
     helm
     gist
+    gh
     magit
     magithub
     melpa
@@ -46,13 +47,20 @@
     inf-ruby
     ruby-block
     ruby-end
+    ruby-mode
+    rspec-mode
+    ruby-compilation
     yari
     rvm
     rinari
     js2-mode
     coffee-mode
     scss-mode
-    yaml-mode)
+    haml-mode
+    yaml-mode
+    slim-mode
+    handlebars-mode
+    rainbow-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
