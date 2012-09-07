@@ -30,6 +30,9 @@
 ;; menus
 (global-set-key (kbd "<f12>") 'menu-bar-mode)
 
+;;fullscreen
+(global-set-key (kbd "C-<f11>") 'ns-toggle-fullscreen)
+
 ;; edit
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
 (global-set-key (kbd "C-x ^") 'join-line)
