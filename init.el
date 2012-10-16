@@ -39,9 +39,10 @@ ELPA (or MELPA).")
 (require 'my-packages)
 (require 'my-customs)
 (require 'my-funcs)
-;; OSX specific settings
 (when (eq system-type 'darwin)
   (require 'my-osx))
+(when (eq system-type 'linux)
+  (require 'my-linux))
 (require 'my-programming)
 (require 'my-keybindings)
 
@@ -49,21 +50,16 @@ ELPA (or MELPA).")
 (load-theme 'deeper-blue t)
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("501caa208affa1145ccbb4b74b6cd66c3091e41c5bb66c677feda9def5eab19c" default)))
  '(fci-rule-color "#073642"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(custom-set-faces)
 
 (set-face-attribute 'default nil :height 140)
 
-;;chinese font
-(set-fontset-font (frame-parameter nil 'font)
-                  'han '("WenQuanYi Zen Hei" . "unicode-bmp"))
+(when (eq system-type 'darwin)
+  (set-fontset-font (frame-parameter nil 'font)
+                    'han '("Hiragino Sans GB" . "unicode-bmp")))
+
+(when (eq system-type 'linux)
+  (set-fontset-font (frame-parameter nil 'font)
+                    'han '("WenQuanYi Zen Hei" . "unicode-bmp")))
