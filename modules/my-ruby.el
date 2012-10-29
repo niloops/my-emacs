@@ -44,4 +44,10 @@
   (local-set-key (kbd "C-h r") 'yari))
 (add-hook 'ruby-mode-hook 'ruby-mode-defaults)
 
+(defun browse-development ()
+  "Browse rails development url"
+  (interactive)
+  (browse-url "http://127.0.0.1:3000"))
+(global-set-key (kbd "C-c ' l") 'browse-development)
+
 (provide 'my-ruby)
