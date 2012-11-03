@@ -66,6 +66,9 @@
 (column-number-mode t)
 (size-indication-mode t)
 
+;; display time
+(display-time-mode t)
+
 ;; make the fringe (gutter) smaller
 ;; the argument is a width in pixels (the default is 8)
 (if (fboundp 'fringe-mode)
