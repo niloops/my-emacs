@@ -44,4 +44,11 @@
   (local-set-key (kbd "C-h r") 'yari))
 (add-hook 'ruby-mode-hook 'ruby-mode-defaults)
 
+(defun spawn-guard ()
+  "Invoke shell test"
+  (interactive)
+  (pop-to-buffer (get-buffer-create (generate-new-buffer-name "*guard*")))
+  (shell (current-buffer))
+  (process-send-string nil "bundle exec guard\n"))
+
 (provide 'my-ruby)
