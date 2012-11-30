@@ -54,12 +54,14 @@ ELPA (or MELPA).")
  '(fci-rule-color "#073642"))
 (custom-set-faces)
 
-(set-face-attribute 'default nil :height 140)
-
 (when (eq system-type 'darwin)
   (set-fontset-font (frame-parameter nil 'font)
-                    'han '("Hiragino Sans GB" . "unicode-bmp")))
+                    'han '("Hiragino Sans GB" . "unicode-bmp"))
+  (set-face-attribute 'default nil :height 200)
+)
 
 (when (eq system-type 'gnu/linux)
   (set-fontset-font (frame-parameter nil 'font)
-                    'han '("WenQuanYi Zen Hei" . "unicode-bmp")))
+                    'han '("WenQuanYi Zen Hei" . "unicode-bmp"))
+  (set-face-attribute 'default nil :height 140)
+)
