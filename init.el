@@ -57,7 +57,7 @@ ELPA (or MELPA).")
 (when (eq system-type 'darwin)
   (set-fontset-font (frame-parameter nil 'font)
                     'han '("Hiragino Sans GB" . "unicode-bmp"))
-  (set-face-attribute 'default nil :height 160)
+  (set-face-attribute 'default nil :height 140)
 )
 
 (when (eq system-type 'gnu/linux)
