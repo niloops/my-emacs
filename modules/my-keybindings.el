@@ -34,7 +34,9 @@
 (global-set-key (kbd "C-M-<return>") 'ns-toggle-fullscreen)
 
 ;; edit
-(global-set-key (kbd "C-M-h") 'backward-kill-word)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-x C-k") 'kill-region)
+(global-set-key (kbd "C-c C-k") 'kill-region)
 (global-set-key (kbd "C-x ^") 'join-line)
 (global-set-key [(shift return)] 'insert-empty-line-after)
 (global-set-key [(meta shift return)] 'insert-empty-line-before)
@@ -65,6 +67,7 @@
 
 ;; commands
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
+(global-set-key (kbd "C-c C-m") 'execute-extended-command)
 
 ;; shells
 (global-set-key (kbd "C-x m") 'shell)
