@@ -59,7 +59,9 @@ the curson at its beginning, according to the current mode."
 (defun indent-buffer ()
   "Indents the entire buffer."
   (interactive)
-  (indent-region (point-min) (point-max)))
+  (save-restriction
+    (widen)
+    (indent-region (point-min) (point-max))))
 
 (defun indent-region-or-buffer ()
   "Indents a region if selected, otherwise the whole buffer."
