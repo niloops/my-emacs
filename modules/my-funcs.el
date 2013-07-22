@@ -131,8 +131,11 @@ there's a region, all lines that region covers will be duplicated."
   (kill-buffer))
 
 (defun untabify-buffer ()
+  "Convert all tabs in current buffer to multiple spaces."
   (interactive)
-  (untabify (point-min) (point-max)))
+  (save-restriction
+    (widen)
+    (untabify (point-min) (point-max))))
 
 (defun cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer."
