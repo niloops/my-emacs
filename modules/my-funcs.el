@@ -122,7 +122,7 @@ there's a region, all lines that region covers will be duplicated."
                (set-buffer-modified-p nil)))))))
 
 (defun delete-file-and-buffer ()
-  "Kills the current buffer and deletes the file it is visiting"
+  "Kill the current buffer and its corresponding file (if any)."
   (interactive)
   (let ((filename (buffer-file-name)))
     (when filename
