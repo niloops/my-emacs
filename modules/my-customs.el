@@ -222,8 +222,8 @@
 
 ;; load yasnippet
 (require 'yasnippet)
-(add-to-list 'yas/snippet-dirs snippets-dir)
-(yas/global-mode 1)
+(add-to-list 'yas-snippet-dirs snippets-dir)
+(yas-global-mode 1)
 
 ;; dired - reuse current buffer by pressing 'a'
 (put 'dired-find-alternate-file 'disabled nil)
