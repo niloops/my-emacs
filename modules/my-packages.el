@@ -38,7 +38,6 @@
     gist
     gh
     magit
-    magithub
     melpa
     rainbow-mode
     yasnippet
