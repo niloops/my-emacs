@@ -53,7 +53,6 @@ ELPA (or MELPA).")
  '(custom-safe-themes (quote ("501caa208affa1145ccbb4b74b6cd66c3091e41c5bb66c677feda9def5eab19c" default)))
  '(fci-rule-color "#073642"))
 
-
 (custom-set-faces)
 (set-fontset-font (frame-parameter nil 'font)
                   'han '("Hiragino Sans GB" . "unicode-bmp"))
