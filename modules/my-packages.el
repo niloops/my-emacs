@@ -51,6 +51,7 @@
     ruby-compilation
     yari
     rvm
+    rbenv
     rinari
     js2-mode
     coffee-mode
