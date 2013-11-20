@@ -51,4 +51,8 @@ file of a buffer in an external program."
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
 
+;; OS X ls doesn't support --dired
+(require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program nil)
+
 (provide 'my-osx)

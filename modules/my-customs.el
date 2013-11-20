@@ -173,7 +173,7 @@
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
 ;; automatically save buffers associated with files on buffer switch
-;; and on windows switch
+; and on windows switch
 (defadvice switch-to-buffer (before save-buffer-now activate)
   (when buffer-file-name (save-buffer)))
 (defadvice other-window (before other-window-now activate)
