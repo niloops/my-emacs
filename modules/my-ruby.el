@@ -39,7 +39,6 @@
 
 (defun ruby-mode-defaults ()
   "My ruby mode hooks"
-  (inf-ruby-setup-keybindings)
   (require 'ruby-block)
   (ruby-block-mode t)
   (setq ruby-block-highlight-toggle t)

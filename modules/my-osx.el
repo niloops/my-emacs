@@ -55,4 +55,12 @@ file of a buffer in an external program."
 (require 'ls-lisp)
 (setq ls-lisp-use-insert-directory-program nil)
 
+;; fullscreen
+(defun toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+   nil 'fullscreen
+   (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
 (provide 'my-osx)
