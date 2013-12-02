@@ -62,5 +62,6 @@ file of a buffer in an external program."
   (set-frame-parameter
    nil 'fullscreen
    (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+(global-set-key (kbd "C-s-f") 'toggle-fullscreen)
 
 (provide 'my-osx)
