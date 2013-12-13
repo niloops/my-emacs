@@ -53,10 +53,17 @@
   (browse-url "http://127.0.0.1:3000"))
 
 (defun spawn-guard ()
-  "Invoke shell test"
+  "Invoke shell to spawn guard"
   (interactive)
   (pop-to-buffer (get-buffer-create (generate-new-buffer-name "*guard*")))
   (shell (current-buffer))
   (process-send-string nil "bundle exec guard\n"))
+
+(defun powder-restart ()
+  "Invoke shell to powder restart"
+  (interactive)
+  (pop-to-buffer (get-buffer-create (generate-new-buffer-name "*powder*")))
+  (shell (current-buffer))
+  (process-send-string nil "powder restart\n powder applog\n"))
 
 (provide 'my-ruby)
