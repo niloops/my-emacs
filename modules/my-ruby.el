@@ -36,6 +36,7 @@
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 (require 'rbenv)
 (global-rbenv-mode)
+(setq ruby-insert-encoding-magic-comment nil)
 
 (defun ruby-mode-defaults ()
   "My ruby mode hooks"
