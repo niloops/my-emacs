@@ -38,7 +38,6 @@
     gist
     gh
     magit
-    melpa
     rainbow-mode
     yasnippet
     auto-complete
