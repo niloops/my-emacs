@@ -43,8 +43,17 @@
 (defun ielm-mode-defaults ()
   (require 'paredit)
   (paredit-mode +1)
+  (rainbow-mode +1)
+  (checkdoc-minor-mode +1)
   (turn-on-eldoc-mode))
 (add-hook 'ielm-mode-hook 'ielm-mode-defaults)
+
+(defun lisp-interaction-mode-defaults ()
+  (require 'paredit)
+  (paredit-mode +1)
+  (rainbow-mode +1)
+  (checkdoc-minor-mode +1)
+  (turn-on-eldoc-mode))
 
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 

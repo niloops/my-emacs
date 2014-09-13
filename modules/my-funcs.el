@@ -59,7 +59,9 @@ the curson at its beginning, according to the current mode."
 (defun indent-buffer ()
   "Indents the entire buffer."
   (interactive)
-  (indent-region (point-min) (point-max)))
+  (save-restriction
+    (widen)
+    (indent-region (point-min) (point-max))))
 
 (defun indent-region-or-buffer ()
   "Indents a region if selected, otherwise the whole buffer."
@@ -104,15 +106,15 @@ there's a region, all lines that region covers will be duplicated."
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 (defun rename-file-and-buffer ()
-  "Renames current buffer and file it is visiting."
+  "Rename current buffer and file it is visiting."
   (interactive)
   (let ((name (buffer-name))
         (filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-        (message "Buffer '%s' is not visiting a file!" name)
+        (user-error "Buffer '%s' is not visiting a file" name)
       (let ((new-name (read-file-name "New name: " filename)))
         (cond ((get-buffer new-name)
-               (message "A buffer named '%s' already exists!" new-name))
+               (user-error "A buffer named '%s' already exists" new-name))
               (t
                (rename-file name new-name 1)
                (rename-buffer new-name)
@@ -120,7 +122,7 @@ there's a region, all lines that region covers will be duplicated."
                (set-buffer-modified-p nil)))))))
 
 (defun delete-file-and-buffer ()
-  "Kills the current buffer and deletes the file it is visiting"
+  "Kill the current buffer and its corresponding file (if any)."
   (interactive)
   (let ((filename (buffer-file-name)))
     (when filename
@@ -129,8 +131,11 @@ there's a region, all lines that region covers will be duplicated."
   (kill-buffer))
 
 (defun untabify-buffer ()
+  "Convert all tabs in current buffer to multiple spaces."
   (interactive)
-  (untabify (point-min) (point-max)))
+  (save-restriction
+    (widen)
+    (untabify (point-min) (point-max))))
 
 (defun cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer."
